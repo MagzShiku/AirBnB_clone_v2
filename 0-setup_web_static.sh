@@ -1,15 +1,9 @@
-#!/bin/bash
-
-# Install Nginx if not already installed
-if ! command -v nginx &> /dev/null; then
-    sudo apt-get update
-    sudo apt-get -y install nginx
-fi
-
-# Create necessary folders
-sudo mkdir -p /data/web_static/{releases/test,shared}
-
-# Create a fake HTML file
+#!/usr/bin/env bash
+# Sets up your web servers for the deployment of web_static
+apt-get update
+apt-get install -y nginx
+mkdir -p /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
 echo "<html>
   <head>
   </head>
@@ -17,23 +11,7 @@ echo "<html>
     Holberton School
   </body>
 </html>" > /data/web_static/releases/test/index.html
-
-# Create symbolic link
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-
-# Give ownership to ubuntu user and group
-sudo chown -R ubuntu:ubuntu /data/
-
-# Update Nginx configuration
-config_block="
-    location /hbnb_static {
-        alias /data/web_static/current/;
-        index index.html;
-    }
-"
-sudo sed -i "/server {/a $config_block" /etc/nginx/sites-available/default
-
-# Restart Nginx
-sudo service nginx restart
-
-exit 0
+ln -sfn  /data/web_static/releases/test/ /data/web_static/current
+chown -R ubuntu:ubuntu /data/
+sed -i "56i \\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-available/default
+service nginx restart
