@@ -36,12 +36,10 @@ def c_text(text):
 
 # Route: /python/<text>
 @app.route('/python/<text>', strict_slashes=False)
-def python_is_cool(text):
-    if "_" in text:
-        p_text = text.replace("_", " ")
-    else:
-        p_text = text
-    return f"Python {text_var}"
+def python_text(text='is cool'):
+    # Replace underscores with spaces
+    processed_text = text.replace('_', ' ')
+    return 'Python {}'.format(processed_text)
 
 
 if __name__ == "__main__":
