@@ -47,13 +47,18 @@ def is_number(n):
     return '{} is a number'.format(n)
 
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
+
+@app.route("/number_template/<n>", strict_slashes=False)
 def number_template(n):
-    # Render an HTML page with the number
-    if isinstance(n, int):
-        return render_template('number_template.html', number=n)
-    else:
-        return 'Not a valid number'
+    """
+    Display a HTML page only if n is an integer
+    H1 tag: “Number: n” inside the tag BODY
+    """
+    try:
+        n = int(n)
+        return render_template('5-number.html', n=n)
+    except ValueError:
+        abort(404)
 
 
 if __name__ == "__main__":
