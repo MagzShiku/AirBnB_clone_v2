@@ -36,7 +36,7 @@ def c_text(text):
 
 # Route: /python/<text>
 @app.route('/python/<text>', strict_slashes=False)
-def python_text(text):
+def python_is_cool(text):
     # Replace underscores with spaces
     processed_text = text.replace('_', ' ')
     return 'Python {}'.format(processed_text)
