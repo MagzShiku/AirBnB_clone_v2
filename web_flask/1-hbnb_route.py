@@ -7,16 +7,17 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/', strict_slashes=False)
-def initiate_helloworld():
-    """returns a string"""
-    return 'Hello HBNB!'
-
 
 @app.route('/', strict_slashes=False)
 def hello():
-    """function that returns a string"""
+    """return string 1"""
     return 'Hello HBNB!'
+
+
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """return string 2"""
+    return 'HBNB'
 
 
 if __name__ == '__main__':
