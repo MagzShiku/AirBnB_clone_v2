@@ -7,6 +7,11 @@ from flask import Flask
 
 app = Flask(__name__)
 
+@app.route('/', strict_slashes=False)
+def initiate_helloworld():
+    """returns a string"""
+    return 'Hello HBNB!'
+
 
 @app.route('/', strict_slashes=False)
 def hello():
