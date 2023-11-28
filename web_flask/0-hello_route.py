@@ -1,22 +1,16 @@
 #!/usr/bin/python3
-"""
-This is a Script that starts a Flask web application
-"""
-
+"""a script that starts a Flask web application"""
 
 from flask import Flask
-
+"""import Flask"""
 
 app = Flask(__name__)
 
+@app.route('/', strict_slashes=False)
+def hello():
+    """return the string ('Hello HBNB!)"""
+    return 'Hello HBNB!'
 
-@app.route("/", strict_slashes=False)
-def hello_hbnb():
-    """
-    Return Hello HBNB!
-    """
-    return "Hello HBNB!"
-
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == '__main__':
+    """main caller"""
+    app.run(host='0.0.0.0', port=5000)
